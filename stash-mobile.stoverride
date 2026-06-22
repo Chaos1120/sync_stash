@@ -1,6 +1,6 @@
 name: Cx Mobile Rules
 desc: |-
-  Cx 移动端 Stash 覆写规则。
+  Cx 移动端 Stash 覆写规则，适用于 Kitty Network 订阅。
   用于 iOS 常开 VPN 场景下的高优先级分流修正。
   机场订阅继续负责节点、策略组和基础国内外分流。
   本覆写不写 MATCH，避免截断原订阅规则。
@@ -18,48 +18,50 @@ rules:
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
 
   # 邮箱同步：iCloud / Outlook 走代理，改善连接稳定性
-  - DOMAIN,imap.mail.me.com,节点选择
-  - DOMAIN,smtp.mail.me.com,节点选择
-  - DOMAIN,outlook.office365.com,节点选择
-  - DOMAIN,smtp.office365.com,节点选择
+  - DOMAIN,imap.mail.me.com,Kitty Network
+  - DOMAIN,smtp.mail.me.com,Kitty Network
+  - DOMAIN,outlook.office365.com,Kitty Network
+  - DOMAIN,smtp.office365.com,Kitty Network
 
   # AI 服务及登录 / 风控 / 支付伴随域名
-  - DOMAIN-SUFFIX,openai.com,节点选择
-  - DOMAIN-SUFFIX,chatgpt.com,节点选择
-  - DOMAIN-SUFFIX,oaistatic.com,节点选择
-  - DOMAIN-SUFFIX,oaiusercontent.com,节点选择
-  - DOMAIN-SUFFIX,sora.com,节点选择
-  - DOMAIN-SUFFIX,claude.ai,节点选择
-  - DOMAIN-SUFFIX,anthropic.com,节点选择
-  - DOMAIN-SUFFIX,gemini.google.com,节点选择
-  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,节点选择
-  - DOMAIN-SUFFIX,auth0.com,节点选择
-  - DOMAIN-SUFFIX,challenges.cloudflare.com,节点选择
-  - DOMAIN-SUFFIX,client-api.arkoselabs.com,节点选择
-  - DOMAIN-SUFFIX,events.statsigapi.net,节点选择
-  - DOMAIN-SUFFIX,featuregates.org,节点选择
-  - DOMAIN-SUFFIX,identrust.com,节点选择
-  - DOMAIN-SUFFIX,intercom.io,节点选择
-  - DOMAIN-SUFFIX,intercomcdn.com,节点选择
-  - DOMAIN-SUFFIX,segment.io,节点选择
-  - DOMAIN-SUFFIX,stripe.com,节点选择
+  - DOMAIN-SUFFIX,openai.com,Kitty Network
+  - DOMAIN-SUFFIX,chatgpt.com,Kitty Network
+  - DOMAIN-SUFFIX,oaistatic.com,Kitty Network
+  - DOMAIN-SUFFIX,oaiusercontent.com,Kitty Network
+  - DOMAIN-SUFFIX,sora.com,Kitty Network
+  - DOMAIN-SUFFIX,claude.ai,Kitty Network
+  - DOMAIN-SUFFIX,anthropic.com,Kitty Network
+  - DOMAIN-SUFFIX,gemini.google.com,Kitty Network
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,Kitty Network
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,Kitty Network
+  - DOMAIN-SUFFIX,openaicom.imgix.net,Kitty Network
+  - DOMAIN-SUFFIX,auth0.com,Kitty Network
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,Kitty Network
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,Kitty Network
+  - DOMAIN-SUFFIX,events.statsigapi.net,Kitty Network
+  - DOMAIN-SUFFIX,featuregates.org,Kitty Network
+  - DOMAIN-SUFFIX,identrust.com,Kitty Network
+  - DOMAIN-SUFFIX,intercom.io,Kitty Network
+  - DOMAIN-SUFFIX,intercomcdn.com,Kitty Network
+  - DOMAIN-SUFFIX,segment.io,Kitty Network
+  - DOMAIN-SUFFIX,stripe.com,Kitty Network
 
   # 开发服务
-  - DOMAIN-SUFFIX,githubusercontent.com,节点选择
-  - DOMAIN-SUFFIX,githubassets.com,节点选择
-  - DOMAIN-SUFFIX,npmjs.com,节点选择
-  - DOMAIN-SUFFIX,npmjs.org,节点选择
-  - DOMAIN-SUFFIX,registry.npmjs.org,节点选择
+  - DOMAIN-SUFFIX,githubusercontent.com,Kitty Network
+  - DOMAIN-SUFFIX,githubassets.com,Kitty Network
+  - DOMAIN-SUFFIX,npmjs.com,Kitty Network
+  - DOMAIN-SUFFIX,npmjs.org,Kitty Network
+  - DOMAIN-SUFFIX,registry.npmjs.org,Kitty Network
 
   # Google 伴随域名：补齐机场规则可能漏掉的连接
-  - DOMAIN-SUFFIX,gvt1.com,节点选择
-  - DOMAIN-SUFFIX,gvt2.com,节点选择
-  - DOMAIN-SUFFIX,gstatic.com,节点选择
-  - DOMAIN-SUFFIX,googleapis.com,节点选择
-  - DOMAIN-SUFFIX,googleapis.cn,节点选择
-  - DOMAIN-SUFFIX,googleusercontent.com,节点选择
-  - DOMAIN-SUFFIX,ggpht.com,节点选择
-  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,节点选择
+  - DOMAIN-SUFFIX,gvt1.com,Kitty Network
+  - DOMAIN-SUFFIX,gvt2.com,Kitty Network
+  - DOMAIN-SUFFIX,gstatic.com,Kitty Network
+  - DOMAIN-SUFFIX,googleapis.com,Kitty Network
+  - DOMAIN-SUFFIX,googleapis.cn,Kitty Network
+  - DOMAIN-SUFFIX,googleusercontent.com,Kitty Network
+  - DOMAIN-SUFFIX,ggpht.com,Kitty Network
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Kitty Network
 
   # 下载 / 更新：明确希望直连的下载链路
   - DOMAIN-SUFFIX,downloads.sparkmailapp.com,DIRECT
