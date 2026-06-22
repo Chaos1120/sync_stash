@@ -1,0 +1,55 @@
+name: Cx Mobile Rules
+desc: |-
+  Cx 移动端规则覆写，用于 Stash 订阅配置。
+  规则数组会被 Stash 插入到原订阅规则前面。
+  默认使用订阅内常见的「节点选择」策略组。
+
+rules:
+  # 邮箱同步修正：iCloud / Outlook 邮件链路走代理观察稳定性
+  - DOMAIN,imap.mail.me.com,节点选择
+  - DOMAIN,smtp.mail.me.com,节点选择
+  - DOMAIN,outlook.office365.com,节点选择
+  - DOMAIN,smtp.office365.com,节点选择
+
+  # 应用更新/安装包下载：直连以减少代理流量
+  - DOMAIN-SUFFIX,downloads.sparkmailapp.com,DIRECT
+  - DOMAIN-SUFFIX,download.autodesk.com,DIRECT
+
+  # AI 服务及登录/风控/支付伴随域名
+  - DOMAIN-SUFFIX,openai.com,节点选择
+  - DOMAIN-SUFFIX,chatgpt.com,节点选择
+  - DOMAIN-SUFFIX,oaistatic.com,节点选择
+  - DOMAIN-SUFFIX,oaiusercontent.com,节点选择
+  - DOMAIN-SUFFIX,sora.com,节点选择
+  - DOMAIN-SUFFIX,claude.ai,节点选择
+  - DOMAIN-SUFFIX,anthropic.com,节点选择
+  - DOMAIN-SUFFIX,gemini.google.com,节点选择
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,节点选择
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,节点选择
+  - DOMAIN-SUFFIX,openaicom.imgix.net,节点选择
+  - DOMAIN-SUFFIX,auth0.com,节点选择
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,节点选择
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com,节点选择
+  - DOMAIN-SUFFIX,events.statsigapi.net,节点选择
+  - DOMAIN-SUFFIX,featuregates.org,节点选择
+  - DOMAIN-SUFFIX,identrust.com,节点选择
+  - DOMAIN-SUFFIX,intercom.io,节点选择
+  - DOMAIN-SUFFIX,intercomcdn.com,节点选择
+  - DOMAIN-SUFFIX,segment.io,节点选择
+  - DOMAIN-SUFFIX,stripe.com,节点选择
+
+  # 开发服务
+  - DOMAIN-SUFFIX,npmjs.com,节点选择
+  - DOMAIN-SUFFIX,npmjs.org,节点选择
+  - DOMAIN-SUFFIX,registry.npmjs.org,节点选择
+  - DOMAIN-SUFFIX,githubusercontent.com,节点选择
+
+  # Google 伴随域名
+  - DOMAIN-SUFFIX,gvt1.com,节点选择
+  - DOMAIN-SUFFIX,gvt2.com,节点选择
+  - DOMAIN-SUFFIX,gstatic.com,节点选择
+  - DOMAIN-SUFFIX,googleapis.com,节点选择
+  - DOMAIN-SUFFIX,googleapis.cn,节点选择
+  - DOMAIN-SUFFIX,googleusercontent.com,节点选择
+  - DOMAIN-SUFFIX,ggpht.com,节点选择
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,节点选择
