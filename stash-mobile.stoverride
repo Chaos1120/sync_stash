@@ -1,21 +1,29 @@
 name: Cx Mobile Rules
 desc: |-
-  Cx 移动端规则覆写，用于 Stash 订阅配置。
-  规则数组会被 Stash 插入到原订阅规则前面。
-  默认使用订阅内常见的「节点选择」策略组。
+  Cx 移动端 Stash 覆写规则。
+  用于 iOS 常开 VPN 场景下的高优先级分流修正。
+  机场订阅继续负责节点、策略组和基础国内外分流。
+  本覆写不写 MATCH，避免截断原订阅规则。
 
 rules:
-  # 邮箱同步修正：iCloud / Outlook 邮件链路走代理观察稳定性
+  # 局域网 / 本机 / 私有地址：常开 VPN 时优先直连
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN,localhost,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+
+  # 邮箱同步：iCloud / Outlook 走代理，改善连接稳定性
   - DOMAIN,imap.mail.me.com,节点选择
   - DOMAIN,smtp.mail.me.com,节点选择
   - DOMAIN,outlook.office365.com,节点选择
   - DOMAIN,smtp.office365.com,节点选择
 
-  # 应用更新/安装包下载：直连以减少代理流量
-  - DOMAIN-SUFFIX,downloads.sparkmailapp.com,DIRECT
-  - DOMAIN-SUFFIX,download.autodesk.com,DIRECT
-
-  # AI 服务及登录/风控/支付伴随域名
+  # AI 服务及登录 / 风控 / 支付伴随域名
   - DOMAIN-SUFFIX,openai.com,节点选择
   - DOMAIN-SUFFIX,chatgpt.com,节点选择
   - DOMAIN-SUFFIX,oaistatic.com,节点选择
@@ -25,8 +33,6 @@ rules:
   - DOMAIN-SUFFIX,anthropic.com,节点选择
   - DOMAIN-SUFFIX,gemini.google.com,节点选择
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com,节点选择
-  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,节点选择
-  - DOMAIN-SUFFIX,openaicom.imgix.net,节点选择
   - DOMAIN-SUFFIX,auth0.com,节点选择
   - DOMAIN-SUFFIX,challenges.cloudflare.com,节点选择
   - DOMAIN-SUFFIX,client-api.arkoselabs.com,节点选择
@@ -39,12 +45,13 @@ rules:
   - DOMAIN-SUFFIX,stripe.com,节点选择
 
   # 开发服务
+  - DOMAIN-SUFFIX,githubusercontent.com,节点选择
+  - DOMAIN-SUFFIX,githubassets.com,节点选择
   - DOMAIN-SUFFIX,npmjs.com,节点选择
   - DOMAIN-SUFFIX,npmjs.org,节点选择
   - DOMAIN-SUFFIX,registry.npmjs.org,节点选择
-  - DOMAIN-SUFFIX,githubusercontent.com,节点选择
 
-  # Google 伴随域名
+  # Google 伴随域名：补齐机场规则可能漏掉的连接
   - DOMAIN-SUFFIX,gvt1.com,节点选择
   - DOMAIN-SUFFIX,gvt2.com,节点选择
   - DOMAIN-SUFFIX,gstatic.com,节点选择
@@ -53,3 +60,7 @@ rules:
   - DOMAIN-SUFFIX,googleusercontent.com,节点选择
   - DOMAIN-SUFFIX,ggpht.com,节点选择
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,节点选择
+
+  # 下载 / 更新：明确希望直连的下载链路
+  - DOMAIN-SUFFIX,downloads.sparkmailapp.com,DIRECT
+  - DOMAIN-SUFFIX,download.autodesk.com,DIRECT
