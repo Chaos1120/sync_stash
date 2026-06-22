@@ -2,4 +2,4 @@
 
 移动端覆写：
 
-https://raw.githubusercontent.com/Chaos1120/sync_stash/main/overrides/stash-mobile.stoverride
+https://raw.githubusercontent.com/Chaos1120/sync_stash/main/stash-mobile.stoverride
